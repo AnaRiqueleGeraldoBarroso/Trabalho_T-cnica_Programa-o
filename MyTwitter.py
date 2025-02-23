@@ -29,6 +29,15 @@ class Tweet():
     def get_postagem(self):
         return self.__data_postagem
 
+    # foi necessário implemetar essa função, para dizer ao Python
+    # que dois objetos Tweet são iguais quando as propriedas
+    # data_postagem e mensagem forem iguai,
+    # e não apenas nas referências de memória.
+    def __eq__(self, other):
+        if not isinstance(other, Tweet):
+            return False
+        return self.__data_postagem == other.get_postagem() and self.__mensagem == other.get_mensagem()
+
 class Perfil():
     def __init__(self, usuario:str):
         self.__usuario = usuario
