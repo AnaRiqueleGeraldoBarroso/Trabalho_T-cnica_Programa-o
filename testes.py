@@ -31,14 +31,24 @@ class TestPerfil(unittest.TestCase):
         self.perfil1.add_tweet(tweet)
         self.assertIn(tweet, self.perfil1._Perfil__tweets)
 
-    #Está dando um erro
-    '''def test_get_tweets(self):
-        tweet1 = Tweet('usuario1', 'Mensagem de teste 1')
-        tweet2 = Tweet('usuario1', 'Mensagem de teste 2')
-        self.perfil1.add_tweet(tweet1)
-        self.perfil1.add_tweet(tweet2)
-        tweets = self.perfil1.get_tweets()
-        self.assertEqual(tweets[0], tweet2)'''
+      def test_get_tweets(self):
+        # Adicionando tweets ao perfil1
+        self.perfil1.add_tweet(self.tweet1)
+        self.perfil1.add_tweet(self.tweet2)
+        self.perfil1.add_tweet(self.tweet3)
+
+        # Obtendo os tweets ordenados de perfil1
+        tweets_ordenados = self.perfil1.get_tweets()
+
+        # Comparando os atributos diretamente em vez de comparar os objetos
+        self.assertEqual(tweets_ordenados[0].get_postagem(), self.tweet3.get_postagem())
+        self.assertEqual(tweets_ordenados[1].get_postagem(), self.tweet1.get_postagem())
+        self.assertEqual(tweets_ordenados[2].get_postagem(), self.tweet2.get_postagem())
+
+    def test_get_tweets_com_vazio(self):
+        # Teste para perfil vazio (sem tweets)
+        tweets_ordenados = self.perfil2.get_tweets()
+        self.assertEqual(tweets_ordenados, [])
 
     def test_get_tweet(self):
         tweet = Tweet('usuario1', 'Mensagem de teste')
